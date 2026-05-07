@@ -1,4 +1,7 @@
+"use client";
+
 import React, { ReactNode, CSSProperties } from "react";
+import { useCardInView } from "./useCardInView";
 
 interface BaseCardProps {
   children: ReactNode;
@@ -15,12 +18,15 @@ export default function BaseCard({
   index = 0,
   style,
 }: BaseCardProps) {
+  const { ref, inView } = useCardInView<HTMLDivElement>();
   const delay = `${index * 60}ms`;
   return (
     <div
+      ref={ref}
+      data-in-view={inView ? "true" : "false"}
       style={{ ...style, ["--delay" as string]: delay }}
       className={`
-        card-hoverable stagger-item
+        card-hoverable card stagger-item
         relative shrink-0 snap-center
         w-[var(--card-w)] h-[var(--card-h)]
         bg-[var(--card-bg)]

@@ -13,7 +13,7 @@ export default function PixelCard({ caption, index }: PixelCardProps) {
     <BaseCard caption={caption} index={index}>
       <div className="w-full h-full flex items-center justify-center">
         <div
-          className="relative flex flex-col items-center justify-end"
+          className="reveal-shape relative flex flex-col items-center justify-end"
           style={{ "--pixel-color": "var(--accent-blue)", "--pixel": "clamp(8px, 1.6vw, 24px)" } as React.CSSProperties}
         >
           {MOUNTAIN_ROWS.map((multiplier) => (

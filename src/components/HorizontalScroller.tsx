@@ -67,6 +67,7 @@ export default function HorizontalScroller({ children }: HorizontalScrollerProps
   return (
     <div
       ref={containerRef}
+      data-scroller
       tabIndex={0}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}

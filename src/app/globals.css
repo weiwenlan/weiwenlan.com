@@ -115,6 +115,35 @@ body {
           mask-image: linear-gradient(to bottom, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
 }
 
+/* (G) In-view reveal — driven by data-in-view on the parent .card.
+   .reveal-shape: scales geometric shapes from 0.85 → 1 (parallax-ish).
+   .reveal-text:  fades + lifts text, with a 150ms delay so shapes lead. */
+.reveal-shape {
+  transform: scale(0.85) translateY(8px);
+  opacity: 0.85;
+  transition:
+    transform 700ms var(--ease-snappy),
+    opacity   500ms var(--ease-snappy);
+  will-change: transform, opacity;
+}
+.card[data-in-view="true"] .reveal-shape {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.reveal-text {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity   600ms var(--ease-snappy) 150ms,
+    transform 600ms var(--ease-snappy) 150ms;
+  will-change: transform, opacity;
+}
+.card[data-in-view="true"] .reveal-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

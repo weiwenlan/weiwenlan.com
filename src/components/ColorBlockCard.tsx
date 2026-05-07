@@ -14,19 +14,19 @@ export default function ColorBlockCard({ caption, shape, color, index }: ColorBl
       <div className="relative w-full h-full flex items-center justify-center">
         {shape === "circle" && (
           <div
-            className="absolute -right-[8%] -bottom-[12%] w-[60%] aspect-square rounded-full"
+            className="reveal-shape absolute -right-[8%] -bottom-[12%] w-[60%] aspect-square rounded-full"
             style={{ backgroundColor: color }}
           />
         )}
         {shape === "square" && (
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[45%] aspect-square rotate-12"
+            className="reveal-shape absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[45%] aspect-square rotate-12"
             style={{ backgroundColor: color }}
           />
         )}
         {shape === "wedge" && (
           <div
-            className="absolute -left-[4%] bottom-[8%] w-[55%] aspect-square"
+            className="reveal-shape absolute -left-[4%] bottom-[8%] w-[55%] aspect-square"
             style={{
               backgroundColor: color,
               clipPath: "polygon(0 0, 100% 100%, 0 100%)",
