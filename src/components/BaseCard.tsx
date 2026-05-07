@@ -1,15 +1,26 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, CSSProperties } from "react";
 
 interface BaseCardProps {
   children: ReactNode;
   className?: string;
   caption?: string;
+  index?: number;
+  style?: CSSProperties;
 }
 
-export default function BaseCard({ children, className = "", caption }: BaseCardProps) {
+export default function BaseCard({
+  children,
+  className = "",
+  caption,
+  index = 0,
+  style,
+}: BaseCardProps) {
+  const delay = `${index * 60}ms`;
   return (
     <div
+      style={{ ...style, ["--delay" as string]: delay }}
       className={`
+        card-hoverable stagger-item
         relative shrink-0 snap-start
         w-[var(--card-w)] h-[var(--card-h)]
         bg-[var(--card-bg)]
@@ -20,7 +31,7 @@ export default function BaseCard({ children, className = "", caption }: BaseCard
       `}
     >
       {caption && (
-        <div className="absolute top-4 left-4 z-10 text-[10px] text-[var(--text-muted)] font-mono uppercase tracking-widest">
+        <div className="card-caption absolute top-4 left-4 z-10 text-[10px] font-mono uppercase tracking-widest">
           {caption}
         </div>
       )}

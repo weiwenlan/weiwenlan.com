@@ -3,35 +3,24 @@ import BaseCard from "./BaseCard";
 
 interface PixelCardProps {
   caption: string;
+  index?: number;
 }
 
-export default function PixelCard({ caption }: PixelCardProps) {
+const MOUNTAIN_ROWS = [10, 30, 50, 70, 90, 110, 130];
+
+export default function PixelCard({ caption, index }: PixelCardProps) {
   return (
-    <BaseCard caption={caption}>
+    <BaseCard caption={caption} index={index}>
       <div className="w-full h-full flex items-center justify-center">
-        {/* CSS Pixel Art Mountain */}
-        <div className="relative w-[120px] h-[100px] flex flex-col items-center justify-end" style={{ "--pixel-color": "var(--accent-blue)" } as React.CSSProperties}>
-          <div className="flex w-full justify-center">
-            <div className="w-[10px] h-[10px] bg-[var(--pixel-color)]" />
-          </div>
-          <div className="flex w-full justify-center">
-            <div className="w-[30px] h-[10px] bg-[var(--pixel-color)]" />
-          </div>
-          <div className="flex w-full justify-center">
-            <div className="w-[50px] h-[10px] bg-[var(--pixel-color)]" />
-          </div>
-          <div className="flex w-full justify-center">
-            <div className="w-[70px] h-[10px] bg-[var(--pixel-color)]" />
-          </div>
-          <div className="flex w-full justify-center">
-            <div className="w-[90px] h-[10px] bg-[var(--pixel-color)]" />
-          </div>
-          <div className="flex w-full justify-center">
-            <div className="w-[110px] h-[10px] bg-[var(--pixel-color)]" />
-          </div>
-          <div className="flex w-full justify-center">
-            <div className="w-[130px] h-[10px] bg-[var(--pixel-color)]" />
-          </div>
+        <div
+          className="relative w-[120px] h-[100px] flex flex-col items-center justify-end"
+          style={{ "--pixel-color": "var(--accent-blue)" } as React.CSSProperties}
+        >
+          {MOUNTAIN_ROWS.map((width) => (
+            <div key={width} className="flex w-full justify-center">
+              <div style={{ width, height: 10 }} className="bg-[var(--pixel-color)]" />
+            </div>
+          ))}
         </div>
       </div>
     </BaseCard>

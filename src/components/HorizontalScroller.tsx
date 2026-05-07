@@ -72,7 +72,7 @@ export default function HorizontalScroller({ children }: HorizontalScrollerProps
       onMouseLeave={handleMouseUpOrLeave}
       onKeyDown={handleKeyDown}
       className={`
-        flex overflow-x-auto hide-scrollbar w-full
+        flex overflow-x-auto hide-scrollbar w-full scroller-feather
         snap-x snap-proximity
         pt-[80px] pb-[40px] px-[var(--page-padding)]
         gap-[var(--card-gap)]

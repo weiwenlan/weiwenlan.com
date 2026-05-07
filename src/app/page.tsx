@@ -12,14 +12,14 @@ export default function Home() {
     <main className="min-h-screen bg-[var(--bg)] flex flex-col items-center overflow-x-hidden selection:bg-[var(--accent-yellow)] selection:text-[var(--text)]">
       <div className="w-full">
         <HorizontalScroller>
-          <IntroCard />
-          <BigTypeCard caption="Work" bigText="Work" />
-          <BigTypeCard caption="Writing" bigText="Papers" />
-          <ColorBlockCard caption="Now" shape="wedge" color="var(--accent-orange)" />
-          <HandwrittenCard caption="Field Notes" text="Wenlan's Field Notes" />
-          <PixelCard caption="Things I Like" />
+          <IntroCard index={0} />
+          <BigTypeCard caption="Work" bigText="Work" index={1} />
+          <BigTypeCard caption="Writing" bigText="Papers" index={2} />
+          <ColorBlockCard caption="Now" shape="wedge" color="var(--accent-orange)" index={3} />
+          <HandwrittenCard caption="Field Notes" text="Wenlan's Field Notes" index={4} />
+          <PixelCard caption="Things I Like" index={5} />
         </HorizontalScroller>
-        
+
         <Manifesto />
       </div>
     </main>
