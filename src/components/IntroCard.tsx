@@ -11,27 +11,27 @@ interface IntroCardProps {
 export default function IntroCard({ index = 0 }: IntroCardProps) {
   return (
     <BaseCard index={index}>
-      <div className="card-caption absolute top-4 left-4 z-10 flex items-end gap-[2px] h-3">
+      <div className="card-caption absolute top-6 left-6 z-10 flex items-end gap-[3px] h-4">
         {BAR_HEIGHTS.map((h, i) => (
           <div
             key={i}
-            className="wave-bar w-[2px] bg-current opacity-60"
+            className="wave-bar w-[3px] bg-current opacity-60"
             style={{
-              height: `${h}px`,
+              height: `${h * 1.4}px`,
               ["--bar-delay" as string]: `${BAR_DELAYS[i]}ms`,
             }}
           />
         ))}
       </div>
 
-      <div className="absolute top-[10%] left-[50%] -translate-x-1/2 w-[280px] h-[280px] rounded-full bg-[var(--accent-yellow)]" />
+      <div className="absolute top-[8%] left-[50%] -translate-x-1/2 w-[clamp(360px,42vw,620px)] aspect-square rounded-full bg-[var(--accent-yellow)]" />
 
-      <div className="relative z-10 w-full h-full flex flex-col justify-center px-8 font-sans font-semibold tracking-tight text-[32px] leading-[1.1]">
+      <div className="relative z-10 w-full h-full flex flex-col justify-center px-[8%] font-sans font-semibold tracking-tight text-[clamp(40px,5.5vw,84px)] leading-[1.05]">
         <div className="ml-0">Wenlan Wei</div>
-        <div className="ml-8 text-[var(--text-muted)]">is a software</div>
+        <div className="ml-[8%] text-[var(--text-muted)]">is a software</div>
         <div className="ml-0">engineer</div>
-        <div className="ml-12 text-[var(--text-muted)]">at Microsoft</div>
-        <div className="ml-4">based in Seattle</div>
+        <div className="ml-[12%] text-[var(--text-muted)]">at Microsoft</div>
+        <div className="ml-[4%]">based in Seattle</div>
       </div>
     </BaseCard>
   );

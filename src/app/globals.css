@@ -12,10 +12,10 @@
   --accent-blue: #2D5BFF;
   --accent-orange: #FF6A00;
 
-  --card-w: 360px;
-  --card-h: 480px;
-  --card-gap: 8px;
-  --page-padding: 24px;
+  --card-w: min(1100px, 88vw);
+  --card-h: min(700px, 72vh);
+  --card-gap: 16px;
+  --page-padding: 6vw;
 
   --ease-snappy: cubic-bezier(0.2, 0.8, 0.2, 1);
   --duration-fast: 150ms;
@@ -34,10 +34,10 @@
   --accent-blue: #2D5BFF;
   --accent-orange: #FF6A00;
 
-  --card-w: 360px;
-  --card-h: 480px;
-  --card-gap: 8px;
-  --page-padding: 24px;
+  --card-w: min(1100px, 88vw);
+  --card-h: min(700px, 72vh);
+  --card-gap: 16px;
+  --page-padding: 6vw;
 
   --ease-snappy: cubic-bezier(0.2, 0.8, 0.2, 1);
   --duration-fast: 150ms;

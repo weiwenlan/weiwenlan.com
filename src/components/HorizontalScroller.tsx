@@ -53,7 +53,9 @@ export default function HorizontalScroller({ children }: HorizontalScrollerProps
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!containerRef.current) return;
-    const cardWidth = 360 + 8; // --card-w + --card-gap roughly
+    const firstCard = containerRef.current.querySelector<HTMLElement>(":scope > *");
+    const gap = 16;
+    const cardWidth = firstCard ? firstCard.getBoundingClientRect().width + gap : 1100;
 
     if (e.key === "ArrowRight") {
       containerRef.current.scrollBy({ left: cardWidth, behavior: "smooth" });
@@ -73,7 +75,7 @@ export default function HorizontalScroller({ children }: HorizontalScrollerProps
       onKeyDown={handleKeyDown}
       className={`
         flex overflow-x-auto hide-scrollbar w-full scroller-feather
-        snap-x snap-proximity
+        snap-x snap-mandatory
         pt-[80px] pb-[40px] px-[var(--page-padding)]
         gap-[var(--card-gap)]
         ${isDragging ? "cursor-grabbing" : "cursor-grab"}

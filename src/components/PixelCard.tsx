@@ -6,19 +6,25 @@ interface PixelCardProps {
   index?: number;
 }
 
-const MOUNTAIN_ROWS = [10, 30, 50, 70, 90, 110, 130];
+const MOUNTAIN_ROWS = [1, 3, 5, 7, 9, 11, 13];
 
 export default function PixelCard({ caption, index }: PixelCardProps) {
   return (
     <BaseCard caption={caption} index={index}>
       <div className="w-full h-full flex items-center justify-center">
         <div
-          className="relative w-[120px] h-[100px] flex flex-col items-center justify-end"
-          style={{ "--pixel-color": "var(--accent-blue)" } as React.CSSProperties}
+          className="relative flex flex-col items-center justify-end"
+          style={{ "--pixel-color": "var(--accent-blue)", "--pixel": "clamp(8px, 1.6vw, 24px)" } as React.CSSProperties}
         >
-          {MOUNTAIN_ROWS.map((width) => (
-            <div key={width} className="flex w-full justify-center">
-              <div style={{ width, height: 10 }} className="bg-[var(--pixel-color)]" />
+          {MOUNTAIN_ROWS.map((multiplier) => (
+            <div key={multiplier} className="flex w-full justify-center">
+              <div
+                className="bg-[var(--pixel-color)]"
+                style={{
+                  width: `calc(var(--pixel) * ${multiplier})`,
+                  height: "var(--pixel)",
+                }}
+              />
             </div>
           ))}
         </div>
