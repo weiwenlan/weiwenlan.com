@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wenlan Wei - Personal Site
 
-## Getting Started
+A fast, highly-visual personal site inspired by rauno.me.
 
-First, run the development server:
+## Overview
+This is v1 of Wenlan Wei's personal site. The focus is on frontend layout fidelity and a bold, diverse visual aesthetic. Content is currently placeholder and can be easily swapped.
+
+Tech stack:
+- Next.js 16 (App Router)
+- Tailwind CSS v4
+- TypeScript
+- Geist & Caveat fonts (via `next/font`)
+
+## How to Swap Content
+
+- **Intro Text**: Open `src/components/IntroCard.tsx`. You will see the text "Wenlan Wei is a software engineer...". Each phrase is placed in its own div with left margins to control indentation.
+- **Card Order & Selection**: Open `src/app/page.tsx`. The cards inside the `<HorizontalScroller>` component determine what is shown. You can rearrange them or duplicate them.
+- **Manifesto (Bottom Text)**: Open `src/components/Manifesto.tsx`. The `lines` array contains the sentences for the bottom text block.
+
+## Adding a New Card
+
+To create a new card style:
+1. Create a new component in `src/components/` (e.g. `MyNewCard.tsx`)
+2. Use the `<BaseCard>` wrapper to ensure it snaps into the grid perfectly:
+   ```tsx
+   import React from "react";
+   import BaseCard from "./BaseCard";
+
+   export default function MyNewCard() {
+     return (
+       <BaseCard caption="New Label">
+         {/* Your custom visual content here */}
+       </BaseCard>
+     );
+   }
+   ```
+3. Import and add it to `src/app/page.tsx`.
+
+## Local Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Commit your changes and push to a new GitHub repository:
+   ```bash
+   git add .
+   git commit -m "Update content"
+   git remote add origin https://github.com/weiwenlan/wenlanwei-site.git
+   git push -u origin main
+   ```
+2. Connect the repository to [Vercel](https://vercel.com).
+3. Vercel will automatically detect the Next.js framework and build the site.
