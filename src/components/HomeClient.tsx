@@ -7,7 +7,6 @@ import BigTypeCard from "@/components/BigTypeCard";
 import ColorBlockCard from "@/components/ColorBlockCard";
 import HandwrittenCard from "@/components/HandwrittenCard";
 import PixelCard from "@/components/PixelCard";
-import Manifesto from "@/components/Manifesto";
 import ScrollIndicator from "@/components/ScrollIndicator";
 
 const TOTAL_CARDS = 6;
@@ -27,8 +26,6 @@ export default function HomeClient() {
           <HandwrittenCard caption="Field Notes" text="Wenlan's Field Notes" index={4} />
           <PixelCard caption="Things I Like" index={5} />
         </HorizontalScroller>
-
-        <Manifesto />
       </div>
     </main>
   );
