@@ -4,9 +4,10 @@ import React, { useRef, useEffect, useState, ReactNode } from "react";
 
 interface HorizontalScrollerProps {
   children: ReactNode;
+  onProgress?: (progress: number) => void;
 }
 
-export default function HorizontalScroller({ children }: HorizontalScrollerProps) {
+export default function HorizontalScroller({ children, onProgress }: HorizontalScrollerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -17,20 +18,27 @@ export default function HorizontalScroller({ children }: HorizontalScrollerProps
     if (!container) return;
 
     const handleWheel = (e: WheelEvent) => {
-      // If we have horizontal delta, let the browser handle it
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-      
       e.preventDefault();
       container.scrollLeft += e.deltaY;
     };
 
-    // Use passive: false to allow e.preventDefault()
+    const handleScroll = () => {
+      if (!onProgress) return;
+      const max = container.scrollWidth - container.clientWidth;
+      const progress = max > 0 ? container.scrollLeft / max : 0;
+      onProgress(Math.min(1, Math.max(0, progress)));
+    };
+
     container.addEventListener("wheel", handleWheel, { passive: false });
-    
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
     return () => {
       container.removeEventListener("wheel", handleWheel);
+      container.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [onProgress]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
