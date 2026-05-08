@@ -12,8 +12,8 @@
   --accent-blue: #2D5BFF;
   --accent-orange: #FF6A00;
 
-  --stage-w: min(1200px, 92vw);
-  --stage-h: min(720px, calc(100dvh - 130px));
+  --stage-w: min(1360px, 96vw);
+  --stage-h: min(820px, calc(100dvh - 80px));
   --card-w: var(--stage-w);
   --card-h: var(--stage-h);
   --card-gap: 16px;
@@ -36,8 +36,8 @@
   --accent-blue: #2D5BFF;
   --accent-orange: #FF6A00;
 
-  --stage-w: min(1200px, 92vw);
-  --stage-h: min(720px, calc(100dvh - 130px));
+  --stage-w: min(1360px, 96vw);
+  --stage-h: min(820px, calc(100dvh - 80px));
   --card-w: var(--stage-w);
   --card-h: var(--stage-h);
   --card-gap: 16px;

@@ -8,7 +8,7 @@ interface DollyZoomStageProps {
   onProgress?: (progress: number) => void;
 }
 
-const SCALE_MAX = 0.88;
+const SCALE_MAX = 0.96;
 const SCALE_MIN = 0.6;
 
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
