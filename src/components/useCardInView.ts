@@ -8,7 +8,7 @@ interface InViewState {
 }
 
 export function useCardInView<T extends HTMLElement = HTMLDivElement>(
-  inViewThreshold = 0.55,
+  inViewThreshold = 0.2,
 ) {
   const ref = useRef<T | null>(null);
   const [state, setState] = useState<InViewState>({ inView: false, ratio: 0 });

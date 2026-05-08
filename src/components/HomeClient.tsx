@@ -7,15 +7,18 @@ import BigTypeCard from "@/components/BigTypeCard";
 import ColorBlockCard from "@/components/ColorBlockCard";
 import HandwrittenCard from "@/components/HandwrittenCard";
 import PixelCard from "@/components/PixelCard";
+import ContactCard from "@/components/ContactCard";
+import Crosshair from "@/components/Crosshair";
 import ScrollIndicator from "@/components/ScrollIndicator";
 
-const TOTAL_CARDS = 6;
+const TOTAL_CARDS = 7;
 
 export default function HomeClient() {
   const [progress, setProgress] = useState(0);
 
   return (
     <main className="min-h-screen bg-[var(--bg)] flex flex-col items-center selection:bg-[var(--accent-yellow)] selection:text-[var(--text)]">
+      <Crosshair />
       <ScrollIndicator totalSteps={TOTAL_CARDS} currentProgress={progress} />
       <DollyZoomStage onProgress={setProgress}>
         <IntroCard index={0} />
@@ -24,6 +27,7 @@ export default function HomeClient() {
         <ColorBlockCard caption="Now" shape="wedge" color="var(--accent-orange)" index={3} />
         <HandwrittenCard caption="Field Notes" text="Wenlan's Field Notes" index={4} />
         <PixelCard caption="Things I Like" index={5} />
+        <ContactCard caption="Say hi" index={6} />
       </DollyZoomStage>
     </main>
   );
