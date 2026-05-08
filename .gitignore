@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# QA / Playwright artifacts
+/.playwright-mcp/
+/site-*.png
+/rauno-*.png

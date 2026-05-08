@@ -20,14 +20,18 @@ export default function BaseCard({
 }: BaseCardProps) {
   const { ref, inView } = useCardInView<HTMLDivElement>();
   const delay = `${index * 60}ms`;
+  
   return (
     <div
       ref={ref}
       data-in-view={inView ? "true" : "false"}
-      style={{ ...style, ["--delay" as string]: delay }}
+      style={{
+        ...style,
+        ["--delay" as string]: delay,
+      }}
       className={`
         card-hoverable card stagger-item
-        relative shrink-0 snap-center
+        relative shrink-0
         w-[var(--card-w)] h-[var(--card-h)]
         bg-[var(--card-bg)]
         border border-[var(--border)]

@@ -12,8 +12,10 @@
   --accent-blue: #2D5BFF;
   --accent-orange: #FF6A00;
 
-  --card-w: min(1280px, 92vw);
-  --card-h: clamp(560px, calc(100vh - 130px), 820px);
+  --stage-w: min(1200px, 92vw);
+  --stage-h: min(720px, calc(100dvh - 130px));
+  --card-w: var(--stage-w);
+  --card-h: var(--stage-h);
   --card-gap: 16px;
   --page-padding: 4vw;
 
@@ -34,8 +36,10 @@
   --accent-blue: #2D5BFF;
   --accent-orange: #FF6A00;
 
-  --card-w: min(1280px, 92vw);
-  --card-h: clamp(560px, calc(100vh - 130px), 820px);
+  --stage-w: min(1200px, 92vw);
+  --stage-h: min(720px, calc(100dvh - 130px));
+  --card-w: var(--stage-w);
+  --card-h: var(--stage-h);
   --card-gap: 16px;
   --page-padding: 4vw;
 
@@ -63,12 +67,14 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 .font-sans {
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
+
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
 
 .hide-scrollbar {
   -ms-overflow-style: none;
@@ -76,6 +82,36 @@ body {
 }
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.dolly-ghost {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+  pointer-events: none;
+  visibility: hidden;
+}
+.dolly-stage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: var(--stage-w);
+  height: var(--stage-h);
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  z-index: 1;
+}
+.dolly-track {
+  display: flex;
+  align-items: stretch;
+  gap: var(--card-gap);
+  height: 100%;
+  width: max-content;
+  will-change: transform;
+  /* Origin at stage's visible center (not track's geometric center) so scaling
+     pivots around what the user sees, matching rauno.me */
+  transform-origin: calc(var(--stage-w) / 2) calc(var(--stage-h) / 2);
 }
 
 /* (A) Stagger entrance — see globals.css decisions doc; --delay set per card */
