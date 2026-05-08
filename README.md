@@ -14,8 +14,7 @@ Tech stack:
 ## How to Swap Content
 
 - **Intro Text**: Open `src/components/IntroCard.tsx`. You will see the text "Wenlan Wei is a software engineer...". Each phrase is placed in its own div with left margins to control indentation.
-- **Card Order & Selection**: Open `src/app/page.tsx`. The cards inside the `<HorizontalScroller>` component determine what is shown. You can rearrange them or duplicate them.
-- **Manifesto (Bottom Text)**: Open `src/components/Manifesto.tsx`. The `lines` array contains the sentences for the bottom text block.
+- **Card Order & Selection**: Open `src/components/HomeClient.tsx`. The cards inside the `<DollyZoomStage>` component determine what is shown. You can rearrange them or duplicate them.
 
 ## Adding a New Card
 
@@ -34,7 +33,7 @@ To create a new card style:
      );
    }
    ```
-3. Import and add it to `src/app/page.tsx`.
+3. Import and add it to `src/components/HomeClient.tsx`.
 
 ## Local Development
 
