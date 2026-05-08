@@ -19,12 +19,6 @@ const papers: Entry[] = [
     description: "W. Wei, Z. Shang, W. Bai · ICAICDA 2026",
   },
   {
-    title: "Evolving Security in LLMs: A Study of Jailbreak Attacks and Defenses",
-    year: "2025",
-    href: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=fa7O7DAAAAAJ&citation_for_view=fa7O7DAAAAAJ:9yKSN-GCB0IC",
-    description: "Z. Shang, W. Wei, W. Bai · arXiv:2504.02080",
-  },
-  {
     title: "Towards Visual Question Answering on Pathology Images",
     year: "2021",
     href: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=fa7O7DAAAAAJ&citation_for_view=fa7O7DAAAAAJ:u5HHmVD_uO8C",
