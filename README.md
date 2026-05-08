@@ -50,7 +50,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
    ```bash
    git add .
    git commit -m "Update content"
-   git remote add origin https://github.com/weiwenlan/wenlanwei-site.git
+   git remote add origin https://github.com/weiwenlan/weiwenlan.com.git
    git push -u origin main
    ```
 2. Connect the repository to [Vercel](https://vercel.com).
