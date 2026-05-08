@@ -290,3 +290,16 @@ html::-webkit-scrollbar { display: none; }
   color: var(--text-muted);
   line-height: 1.5;
 }
+
+.subpage-outbound {
+  align-self: flex-start;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-snappy);
+}
+.subpage-outbound:hover { color: var(--accent-red); }
+.subpage-outbound span { margin-left: 6px; }
