@@ -19,8 +19,8 @@ export default function HomeClient() {
       <ScrollIndicator totalSteps={TOTAL_CARDS} currentProgress={progress} />
       <DollyZoomStage onProgress={setProgress}>
         <IntroCard index={0} />
-        <BigTypeCard caption="Work" bigText="Work" index={1} />
-        <BigTypeCard caption="Writing" bigText="Papers" index={2} />
+        <BigTypeCard caption="Work" bigText="Work" index={1} href="/work" />
+        <BigTypeCard caption="Writing" bigText="Papers" index={2} href="/papers" />
         <ColorBlockCard caption="Now" shape="wedge" color="var(--accent-orange)" index={3} />
         <HandwrittenCard caption="Field Notes" text="Wenlan's Field Notes" index={4} />
         <PixelCard caption="Things I Like" index={5} />

@@ -192,3 +192,86 @@ html::-webkit-scrollbar { display: none; }
   .stagger-item { opacity: 1; transform: none; }
   .wave-bar    { transform: scaleY(0.6); }
 }
+
+.subpage {
+  min-height: 100dvh;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.subpage-header {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.subpage-back {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-decoration: none;
+  width: fit-content;
+  transition: color var(--duration-fast) var(--ease-snappy);
+}
+.subpage-back:hover { color: var(--text); }
+.subpage-back span { margin-right: 6px; }
+.subpage-title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0;
+}
+
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.entry-row {
+  opacity: 0;
+  animation: raunoFade 0.5s var(--ease-snappy) forwards;
+  animation-delay: var(--entry-delay, 0ms);
+}
+.entry-link {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 16px;
+  color: var(--text);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-snappy);
+}
+.entry-link:hover { color: var(--accent-red); }
+.entry-link--inert { cursor: default; color: var(--text-muted); }
+.entry-link--inert:hover { color: var(--text-muted); }
+.entry-link--inert:hover .entry-year { color: var(--text-muted); }
+.entry-title { flex: 0 0 auto; }
+.entry-leader {
+  flex: 1 1 auto;
+  height: 1px;
+  border-bottom: 1px dotted var(--border);
+  transform: translateY(-4px);
+}
+.entry-year {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.entry-link:hover .entry-year { color: var(--accent-red); }
+.entry-desc {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
