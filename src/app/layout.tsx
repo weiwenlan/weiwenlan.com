@@ -15,7 +15,7 @@ const caveat = Caveat({
 
 export const metadata: Metadata = {
   title: "Wenlan Wei",
-  description: "Wenlan Wei 魏文澜 — one boulder at a time.",
+  description: "Wenlan Wei rolls one boulder at a time.",
 };
 
 export default function RootLayout({
