@@ -22,6 +22,7 @@
 
 # misc
 .DS_Store
+**/.DS_Store
 *.pem
 
 # debug
@@ -40,13 +41,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# QA / Playwright artifacts
+# QA / Playwright artifacts (keep all out of repo root; use docs/screenshots/ if needed)
 /.playwright-mcp/
-/site-*.png
-/rauno-*.png
-/subpage-*.png
+/*.png
 /rauno-*.md
-/intro-*.png
-/contact-*.png
-/crosshair-*.png
-/papers-*.png

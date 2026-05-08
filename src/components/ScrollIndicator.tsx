@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 interface ScrollIndicatorProps {
@@ -13,15 +13,28 @@ const LINE_WIDTH = 1;
 const LINE_HEIGHT = 18;
 const LINE_GAP = 9;
 const TRACKER_WIDTH = 30;
+const HIDE_DELAY_MS = 1500;
 
 export default function ScrollIndicator({ currentProgress }: ScrollIndicatorProps) {
   const [isScrolling, setIsScrolling] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    setIsScrolling(true);
-    const timeout = setTimeout(() => setIsScrolling(false), 1500);
-    return () => clearTimeout(timeout);
-  }, [currentProgress]);
+    const showThenHide = () => {
+      setIsScrolling((prev) => (prev ? prev : true));
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => setIsScrolling(false), HIDE_DELAY_MS);
+    };
+    window.addEventListener("scroll", showThenHide, { passive: true });
+    window.addEventListener("wheel", showThenHide, { passive: true });
+    window.addEventListener("keydown", showThenHide);
+    return () => {
+      window.removeEventListener("scroll", showThenHide);
+      window.removeEventListener("wheel", showThenHide);
+      window.removeEventListener("keydown", showThenHide);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const lineSpacing = LINE_WIDTH + LINE_GAP;
   const railWidth = TOTAL_LINES * lineSpacing - LINE_GAP;
