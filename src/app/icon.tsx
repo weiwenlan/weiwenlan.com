@@ -14,20 +14,14 @@ export default function Icon() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#0A0A0A",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          fontSize: 26,
+          lineHeight: 1,
         }}
       >
-        <div
-          style={{
-            width: 18,
-            height: 18,
-            borderRadius: "50%",
-            background: "#FFFF02",
-          }}
-        />
+        🏔️
       </div>
     ),
     { ...size }

@@ -14,20 +14,14 @@ export default function AppleIcon() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#0A0A0A",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          fontSize: 144,
+          lineHeight: 1,
         }}
       >
-        <div
-          style={{
-            width: 100,
-            height: 100,
-            borderRadius: "50%",
-            background: "#FFFF02",
-          }}
-        />
+        🏔️
       </div>
     ),
     { ...size }
