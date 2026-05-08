@@ -33,8 +33,12 @@ export default function EntryList({ entries }: EntryListProps) {
         const inner = (
           <>
             <span className="entry-title">{entry.title}</span>
-            <span className="entry-leader" aria-hidden />
-            <span className="entry-year">{entry.year}</span>
+            <span className="entry-meta">
+              {entry.description && (
+                <span className="entry-venue">{entry.description}</span>
+              )}
+              <span className="entry-year">{entry.year}</span>
+            </span>
           </>
         );
 
@@ -61,9 +65,6 @@ export default function EntryList({ entries }: EntryListProps) {
               )
             ) : (
               <div className="entry-link entry-link--inert">{inner}</div>
-            )}
-            {entry.description && (
-              <p className="entry-desc">{entry.description}</p>
             )}
           </li>
         );
