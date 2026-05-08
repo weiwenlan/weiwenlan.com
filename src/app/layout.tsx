@@ -28,6 +28,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${caveat.variable} antialiased`}
       >
+        <a href="#content" className="skip-link">Skip to content</a>
         {children}
       </body>
     </html>

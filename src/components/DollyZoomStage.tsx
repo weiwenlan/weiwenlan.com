@@ -8,8 +8,8 @@ interface DollyZoomStageProps {
   onProgress?: (progress: number) => void;
 }
 
-const SCALE_MAX = 0.96;
-const SCALE_MIN = 0.6;
+const SCALE_MAX = 0.88;
+const SCALE_MIN = 0.60;
 
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
@@ -64,10 +64,9 @@ export default function DollyZoomStage({ children, onProgress }: DollyZoomStageP
     };
   }, []);
 
-  // Mouse wheel adapter for vertical scrolling (convert deltaY to deltaX)
   useEffect(() => {
+    if (shouldReduceMotion) return;
     const handleWheel = (e: WheelEvent) => {
-      // If user is just scrolling vertically with a non-trackpad mouse
       if (e.deltaX === 0 && e.deltaY !== 0 && !e.ctrlKey) {
         e.preventDefault();
         window.scrollBy({ left: e.deltaY, behavior: "auto" });
@@ -75,24 +74,23 @@ export default function DollyZoomStage({ children, onProgress }: DollyZoomStageP
     };
     window.addEventListener("wheel", handleWheel, { passive: false });
     return () => window.removeEventListener("wheel", handleWheel);
-  }, []);
+  }, [shouldReduceMotion]);
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!trackRef.current) return;
-      
+
       if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
         const firstCard = trackRef.current.firstElementChild as HTMLElement;
         const cardWidth = firstCard ? firstCard.getBoundingClientRect().width : 1200;
-        const gap = 16; // matching --card-gap
+        const gap = 16;
         const move = e.key === "ArrowRight" ? cardWidth + gap : -(cardWidth + gap);
-        window.scrollBy({ left: move, behavior: "smooth" });
+        window.scrollBy({ left: move, behavior: shouldReduceMotion ? "auto" : "smooth" });
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [shouldReduceMotion]);
 
   return (
     <>
