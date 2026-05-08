@@ -12,8 +12,7 @@ const experience: Entry[] = [
 ];
 
 const education: Entry[] = [
-  { title: "M.Eng. ECE, Cornell Tech",               year: "Jul 2021 — May 2022" },
-  { title: "M.Eng. EECE, Cornell University",        year: "Sep 2021 — Jul 2022" },
+  { title: "M.Eng. ECE, Cornell Tech", year: "Jul 2021 — May 2022" },
 ];
 
 export const metadata = {
