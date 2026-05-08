@@ -12,10 +12,9 @@ export default function IntroCard({ index = 0 }: IntroCardProps) {
 
       <div className="reveal-text relative z-10 w-full h-full flex flex-col justify-center px-[5.3%] font-sans font-semibold tracking-tight text-[clamp(44px,6.6vw,100px)] leading-[1.06]">
         <div className="ml-0">Wenlan Wei</div>
-        <div className="ml-[5.3%] text-[var(--text-muted)]">is a software</div>
-        <div className="ml-0">engineer</div>
-        <div className="ml-[5.3%] text-[var(--text-muted)]">at Microsoft</div>
-        <div className="ml-0">based in Seattle</div>
+        <div className="ml-[5.3%] text-[var(--text-muted)]">魏文澜</div>
+        <div className="ml-0">one boulder</div>
+        <div className="ml-[5.3%] text-[var(--text-muted)]">at a time</div>
       </div>
     </BaseCard>
   );

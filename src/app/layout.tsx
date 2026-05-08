@@ -15,7 +15,7 @@ const caveat = Caveat({
 
 export const metadata: Metadata = {
   title: "Wenlan Wei",
-  description: "Software engineer at Microsoft, based in Seattle.",
+  description: "Wenlan Wei 魏文澜 — one boulder at a time.",
 };
 
 export default function RootLayout({
