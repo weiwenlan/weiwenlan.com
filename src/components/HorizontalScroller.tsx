@@ -85,7 +85,7 @@ export default function HorizontalScroller({ children, onProgress }: HorizontalS
       className={`
         flex overflow-x-auto hide-scrollbar w-full scroller-feather
         snap-x snap-mandatory
-        pt-[60px] pb-[24px] px-[var(--page-padding)]
+        pt-[90px] pb-[24px] px-[var(--page-padding)]
         gap-[var(--card-gap)]
         ${isDragging ? "cursor-grabbing" : "cursor-grab"}
         outline-none

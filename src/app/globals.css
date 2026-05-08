@@ -13,7 +13,7 @@
   --accent-orange: #FF6A00;
 
   --card-w: min(1280px, 92vw);
-  --card-h: min(820px, 84vh);
+  --card-h: clamp(560px, calc(100vh - 130px), 820px);
   --card-gap: 16px;
   --page-padding: 4vw;
 
@@ -35,7 +35,7 @@
   --accent-orange: #FF6A00;
 
   --card-w: min(1280px, 92vw);
-  --card-h: min(820px, 84vh);
+  --card-h: clamp(560px, calc(100vh - 130px), 820px);
   --card-gap: 16px;
   --page-padding: 4vw;
 

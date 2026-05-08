@@ -39,7 +39,7 @@ export default function ScrollIndicator({ currentProgress }: ScrollIndicatorProp
             className="block bg-[var(--text-muted)]"
             style={{ width: LINE_WIDTH, height: LINE_HEIGHT }}
             initial={false}
-            animate={{ opacity: isScrolling ? 0.4 : 0.12 }}
+            animate={{ opacity: isScrolling ? 0.4 : 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           />
         ))}
@@ -52,7 +52,7 @@ export default function ScrollIndicator({ currentProgress }: ScrollIndicatorProp
             background: "transparent",
           }}
           initial={false}
-          animate={{ x: trackerLeft, opacity: isScrolling ? 1 : 0.5 }}
+          animate={{ x: trackerLeft, opacity: isScrolling ? 1 : 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.6 }}
         />
       </div>
