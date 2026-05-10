@@ -43,7 +43,7 @@ export default function ScrollIndicator({ currentProgress }: ScrollIndicatorProp
   return (
     <div
       aria-hidden
-      className="fixed top-[64px] left-1/2 -translate-x-1/2 z-50 pointer-events-none"
+      className="fixed top-[64px] left-1/2 -translate-x-1/2 z-[var(--z-overlay)] pointer-events-none"
     >
       <div className="relative flex items-center" style={{ height: LINE_HEIGHT, gap: `${LINE_GAP}px` }}>
         {Array.from({ length: TOTAL_LINES }, (_, i) => (

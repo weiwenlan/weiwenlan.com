@@ -23,7 +23,7 @@ const LINES: ContactLine[] = [
 export default function ContactCard({ caption = "Say hi", index }: ContactCardProps) {
   return (
     <BaseCard caption={caption} index={index}>
-      <div className="reveal-text relative z-10 w-full h-full flex flex-col justify-center px-[5.3%] font-sans font-semibold tracking-tight text-[clamp(44px,6.6vw,100px)] leading-[1.25]">
+      <div className="reveal-text relative z-[var(--z-content)] w-full h-full flex flex-col justify-center px-[5.3%] font-sans font-semibold tracking-tight text-[clamp(44px,6.6vw,100px)] leading-[1.25]">
         {LINES.map((line) => {
           const external = line.href.startsWith("http");
           return (

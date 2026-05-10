@@ -40,7 +40,7 @@ export default function BaseCard({
       `}
     >
       {caption && (
-        <div className="card-caption absolute top-8 left-8 z-10 text-[13px] font-mono uppercase tracking-widest">
+        <div className="card-caption absolute top-8 left-8 z-[var(--z-content)] text-[13px] font-mono uppercase tracking-widest">
           {caption}
         </div>
       )}

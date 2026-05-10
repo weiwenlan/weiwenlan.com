@@ -88,13 +88,17 @@ export default function DollyZoomStage({ children, onProgress }: DollyZoomStageP
       if (!trackRef.current) return;
 
       if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-        const firstCard = trackRef.current.firstElementChild as HTMLElement;
-        const cardWidth = firstCard ? firstCard.getBoundingClientRect().width : 1200;
-        // keep in sync with --card-gap in globals.css
-        const gap = parseFloat(
-          getComputedStyle(document.documentElement).getPropertyValue("--card-gap")
-        ) || 32;
-        const move = e.key === "ArrowRight" ? cardWidth + gap : -(cardWidth + gap);
+        // Read intrinsic (un-transformed) card geometry from CSS variables so
+        // arrow nav steps by one card regardless of current dolly scale.
+        const rootStyle = getComputedStyle(document.documentElement);
+        const firstCard = trackRef.current.firstElementChild as HTMLElement | null;
+        const cardWidth =
+          firstCard?.offsetWidth ||
+          parseFloat(rootStyle.getPropertyValue("--card-w")) ||
+          1200;
+        const gap = parseFloat(rootStyle.getPropertyValue("--card-gap")) || 32;
+        const step = cardWidth + gap;
+        const move = e.key === "ArrowRight" ? step : -step;
         window.scrollBy({ left: move, behavior: shouldReduceMotion ? "auto" : "smooth" });
       }
     };
