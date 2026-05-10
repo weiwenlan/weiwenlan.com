@@ -55,7 +55,7 @@ export default function PapersPage() {
 
       <section className="subpage-section">
         <h2 className="subpage-section-title">Selected Publications</h2>
-        <EntryList entries={papers} />
+        <EntryList entries={papers} variant="stacked" />
       </section>
 
       <a
