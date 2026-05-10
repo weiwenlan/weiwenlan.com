@@ -28,6 +28,9 @@ export default function BaseCard({
       style={{
         ...style,
         ["--delay" as string]: delay,
+        transform: "translateZ(0)",
+        backfaceVisibility: "hidden",
+        contain: "layout paint",
       }}
       className={`
         card-hoverable card stagger-item

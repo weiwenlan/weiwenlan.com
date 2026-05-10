@@ -108,6 +108,7 @@ html::-webkit-scrollbar { display: none; }
   transform: translate(-50%, -50%);
   overflow: visible;
   z-index: var(--z-stage);
+  contain: layout paint;
 }
 .dolly-track {
   display: flex;
@@ -117,6 +118,7 @@ html::-webkit-scrollbar { display: none; }
   width: max-content;
   will-change: transform;
   transform-origin: calc(var(--stage-w) / 2) calc(var(--stage-h) / 2);
+  backface-visibility: hidden;
 }
 
 @keyframes raunoFade {

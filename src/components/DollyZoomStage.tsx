@@ -73,14 +73,27 @@ export default function DollyZoomStage({ children, onProgress }: DollyZoomStageP
 
   useEffect(() => {
     if (shouldReduceMotion) return;
+    let pending = 0;
+    let raf = 0;
+    const flush = () => {
+      raf = 0;
+      if (pending !== 0) {
+        window.scrollBy({ left: pending, behavior: "auto" });
+        pending = 0;
+      }
+    };
     const handleWheel = (e: WheelEvent) => {
       if (e.deltaX === 0 && e.deltaY !== 0 && !e.ctrlKey) {
         e.preventDefault();
-        window.scrollBy({ left: e.deltaY, behavior: "auto" });
+        pending += e.deltaY;
+        if (!raf) raf = requestAnimationFrame(flush);
       }
     };
     window.addEventListener("wheel", handleWheel, { passive: false });
-    return () => window.removeEventListener("wheel", handleWheel);
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, [shouldReduceMotion]);
 
   useEffect(() => {

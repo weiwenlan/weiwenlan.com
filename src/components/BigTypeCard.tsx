@@ -27,6 +27,7 @@ export default function BigTypeCard({ caption, bigText, index, href }: BigTypeCa
       href={href}
       aria-label={caption}
       className="block cursor-pointer focus-visible:outline-none focus-visible:[&_>div]:outline focus-visible:[&_>div]:outline-2 focus-visible:[&_>div]:outline-[var(--focus-ring)] focus-visible:[&_>div]:outline-offset-[-4px]"
+      style={{ transform: "translateZ(0)", backfaceVisibility: "hidden", contain: "layout paint" }}
     >
       {card}
     </Link>
