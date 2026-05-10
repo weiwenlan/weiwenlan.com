@@ -45,7 +45,11 @@ export default function EntryList({ entries, variant = "default" }: EntryListPro
           );
 
         return (
-          <li key={`${entry.title}-${entry.year}-${idx}`}>
+          <li
+            key={`${entry.title}-${entry.year}-${idx}`}
+            className="entry-row-anim"
+            style={{ ["--row-i" as string]: idx }}
+          >
             {entry.href ? (
               isExternal ? (
                 <a

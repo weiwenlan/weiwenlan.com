@@ -8,11 +8,10 @@ interface DollyZoomStageProps {
   onProgress?: (progress: number) => void;
 }
 
-const SCALE_MAX = 1.0;
-const SCALE_MIN = 0.60;
+const SCALE_MAX = 0.95;
+const SCALE_MIN = 0.62;
 
-// smoothstep: gentle ease-in-out, perceived rate matches scroll input
-const smoothstep = (t: number) => t * t * (3 - 2 * t);
+const raunoEase = (t: number) => Math.pow(t, 0.85);
 
 export default function DollyZoomStage({ children, onProgress }: DollyZoomStageProps) {
   const ghostRef = useRef<HTMLDivElement>(null);
@@ -25,7 +24,7 @@ export default function DollyZoomStage({ children, onProgress }: DollyZoomStageP
   const translateX = useTransform(scrollX, (v) => -v);
   const scale = useTransform(scrollXProgress, (p) => {
     if (shouldReduceMotion) return 1;
-    return SCALE_MAX - (SCALE_MAX - SCALE_MIN) * smoothstep(p);
+    return SCALE_MAX - (SCALE_MAX - SCALE_MIN) * raunoEase(p);
   });
 
   useEffect(() => {
@@ -44,16 +43,17 @@ export default function DollyZoomStage({ children, onProgress }: DollyZoomStageP
       if (!track || !stage || !ghost) return;
       const trackWidth = track.scrollWidth;
       const stageWidth = stage.clientWidth;
+      const firstCard = track.firstElementChild as HTMLElement | null;
+      const cardWidth = firstCard?.offsetWidth || stageWidth;
 
-      // Solve: at maxScrollX with scale=SCALE_MIN, last card's right edge sits
-      // at stage's right edge. Transform pivots around stage center (S/2):
-      //   stageX(p) = (p - S/2) * scale + S/2 - scrollX
-      // Set stageX(W) = S, scale = SCALE_MIN:
-      //   maxScrollX = (W - S/2) * SCALE_MIN - S/2
-      const halfStage = stageWidth / 2;
+      // Track scales around first-card center (origin = cardWidth/2). At end of
+      // scroll the last card's right edge should sit at the stage right edge.
+      // stageX(p) = (p - O) * s + O - scrollX, want stageX(W) = S, s = SCALE_MIN:
+      //   maxScrollX = (W - O) * SCALE_MIN + O - S
+      const origin = cardWidth / 2;
       const maxScrollX = Math.max(
         0,
-        (trackWidth - halfStage) * SCALE_MIN - halfStage
+        (trackWidth - origin) * SCALE_MIN + origin - stageWidth
       );
       ghost.style.width = `${maxScrollX + window.innerWidth}px`;
     };

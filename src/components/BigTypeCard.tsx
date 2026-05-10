@@ -12,8 +12,8 @@ interface BigTypeCardProps {
 export default function BigTypeCard({ caption, bigText, index, href }: BigTypeCardProps) {
   const card = (
     <BaseCard caption={caption} index={index}>
-      <div className="w-full h-full flex flex-col justify-end pb-12 pl-12 overflow-hidden">
-        <h2 className="reveal-text font-sans font-normal text-[clamp(180px,28vw,420px)] leading-[0.8] text-[var(--text)] whitespace-nowrap">
+      <div className="w-full h-full flex flex-col justify-end pb-8 pl-8 overflow-hidden">
+        <h2 className="reveal-text font-sans font-normal text-[clamp(420px,60vw,820px)] leading-[0.78] tracking-[-0.04em] text-[var(--text)] whitespace-nowrap">
           {bigText}
         </h2>
       </div>

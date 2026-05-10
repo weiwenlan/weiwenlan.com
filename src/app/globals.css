@@ -14,11 +14,11 @@
   --accent-orange: #FF6A00;
   --focus-ring: var(--accent-blue);
 
-  --stage-w: min(1360px, 96vw);
-  --stage-h: min(820px, calc(100dvh - 80px));
+  --stage-w: min(1400px, 92vw);
+  --stage-h: min(820px, calc(100dvh - 140px));
   --card-w: var(--stage-w);
   --card-h: var(--stage-h);
-  --card-gap: 32px;
+  --card-gap: 36px;
 
   --ease-snappy: cubic-bezier(0.2, 0.8, 0.2, 1);
   --duration-fast: 150ms;
@@ -106,7 +106,7 @@ html::-webkit-scrollbar { display: none; }
   width: var(--stage-w);
   height: var(--stage-h);
   transform: translate(-50%, -50%);
-  overflow: hidden;
+  overflow: visible;
   z-index: var(--z-stage);
 }
 .dolly-track {
@@ -177,6 +177,39 @@ html::-webkit-scrollbar { display: none; }
   will-change: transform, opacity;
 }
 
+@keyframes clipReveal {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0);    }
+}
+.clip-reveal {
+  margin: 0;
+  overflow: hidden;
+  line-height: inherit;
+}
+.clip-reveal > span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: clipReveal 700ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: var(--clip-delay, 0ms);
+  will-change: transform;
+}
+.clip-reveal[data-variant="offset"] {
+  margin-left: 8%;
+}
+
+@keyframes bloomIn {
+  from { opacity: 0; transform: scale(0.4); }
+  to   { opacity: 1; transform: scale(1);   }
+}
+.bloom-in {
+  display: inline-block;
+  transform-origin: center center;
+  opacity: 0;
+  animation: bloomIn 800ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: var(--bloom-delay, 0ms);
+  will-change: transform, opacity;
+}
+
 @media (hover: none) and (pointer: coarse) {
   .dolly-ghost { display: none; }
   .dolly-stage {
@@ -218,6 +251,10 @@ html::-webkit-scrollbar { display: none; }
   .stagger-item { opacity: 1; transform: none; }
   .wave-bar    { transform: scaleY(0.6); }
   .reveal-shape, .reveal-text { opacity: 1; transform: none; }
+  .clip-reveal > span { transform: none; }
+  .bloom-in { opacity: 1; transform: none; }
+  .subpage-back, .subpage-title, .subpage-section-title,
+  .entry-row-anim, .subpage-outbound { opacity: 1; transform: none; }
 }
 
 .subpage {
@@ -229,6 +266,26 @@ html::-webkit-scrollbar { display: none; }
   flex-direction: column;
   gap: 48px;
 }
+
+@keyframes subpageRise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.subpage-back,
+.subpage-title,
+.subpage-section-title,
+.entry-row-anim,
+.subpage-outbound {
+  opacity: 0;
+  animation: subpageRise 600ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: var(--rise-delay, 0ms);
+  will-change: transform, opacity;
+}
+.subpage-back        { --rise-delay: 0ms; }
+.subpage-title       { --rise-delay: 80ms; }
+.subpage-section-title { --rise-delay: 160ms; }
+.entry-row-anim      { --rise-delay: calc(220ms + var(--row-i, 0) * 60ms); }
+.subpage-outbound    { --rise-delay: 600ms; }
 .subpage-header {
   display: flex;
   flex-direction: column;
