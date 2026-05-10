@@ -282,12 +282,11 @@ html::-webkit-scrollbar { display: none; }
 }
 .entry-link {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 16px;
+  align-items: baseline;
+  gap: 16px;
+  padding: 0;
+  font-size: 14px;
+  line-height: 28px;
   color: var(--text);
   text-decoration: none;
   transition: color var(--duration-fast) var(--ease-snappy);
@@ -297,29 +296,25 @@ html::-webkit-scrollbar { display: none; }
 .entry-link--inert:hover { color: var(--text); }
 .entry-link--inert .entry-meta { color: var(--text-muted); }
 .entry-title {
-  width: 100%;
-  max-width: 72ch;
-  line-height: 1.35;
-  text-wrap: balance;
+  font-weight: 500;
+  flex-shrink: 1;
+  min-width: 0;
 }
 .entry-meta {
   display: flex;
-  flex-wrap: wrap;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 8px 16px;
-  width: 100%;
-  font-size: 13px;
-  line-height: 1.4;
+  gap: 16px;
+  font-size: 14px;
+  line-height: 28px;
   color: var(--text-muted);
+  margin-left: auto;
+  flex-shrink: 0;
 }
 .entry-venue { color: inherit; }
 .entry-year {
   font-variant-numeric: tabular-nums;
-  font-family: var(--font-mono);
-  font-size: 13px;
+  font-weight: 400;
   color: inherit;
-  margin-left: auto;
 }
 .entry-link:hover .entry-meta { color: var(--text-muted); }
 
