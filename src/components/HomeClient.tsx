@@ -16,10 +16,10 @@ export default function HomeClient() {
 
   const cards = [
     <IntroCard key="intro" index={0} />,
-    <PixelCard key="things" caption="Things I Like" index={1} />,
-    <BigTypeCard key="work" caption="Work" bigText="Work" index={2} href="/work" />,
-    <HandwrittenCard key="notes" caption="Field Notes" text="Wenlan's Field Notes" index={3} />,
-    <BigTypeCard key="papers" caption="Writing" bigText="Papers" index={4} href="/papers" />,
+    <BigTypeCard key="work" caption="Work" bigText="Work" index={1} href="/work" />,
+    <BigTypeCard key="papers" caption="Writing" bigText="Papers" index={2} href="/papers" />,
+    <PixelCard key="things" caption="Things I Like" index={3} />,
+    <HandwrittenCard key="notes" caption="Field Notes" text="Wenlan's Field Notes" index={4} />,
     <ColorBlockCard key="now" caption="Now" shape="wedge" color="var(--accent-orange)" index={5} />,
     <ContactCard key="contact" caption="Say hi" index={6} />,
   ];
