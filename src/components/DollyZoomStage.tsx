@@ -8,10 +8,11 @@ interface DollyZoomStageProps {
   onProgress?: (progress: number) => void;
 }
 
-const SCALE_MAX = 0.88;
+const SCALE_MAX = 1.0;
 const SCALE_MIN = 0.60;
 
-const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+// smoothstep: gentle ease-in-out, perceived rate matches scroll input
+const smoothstep = (t: number) => t * t * (3 - 2 * t);
 
 export default function DollyZoomStage({ children, onProgress }: DollyZoomStageProps) {
   const ghostRef = useRef<HTMLDivElement>(null);
@@ -24,7 +25,7 @@ export default function DollyZoomStage({ children, onProgress }: DollyZoomStageP
   const translateX = useTransform(scrollX, (v) => -v);
   const scale = useTransform(scrollXProgress, (p) => {
     if (shouldReduceMotion) return 1;
-    return SCALE_MAX - (SCALE_MAX - SCALE_MIN) * easeOutCubic(p);
+    return SCALE_MAX - (SCALE_MAX - SCALE_MIN) * smoothstep(p);
   });
 
   useEffect(() => {
@@ -34,10 +35,15 @@ export default function DollyZoomStage({ children, onProgress }: DollyZoomStageP
   }, [scrollXProgress, onProgress]);
 
   useEffect(() => {
+    let mounted = true;
     const updateGhostWidth = () => {
-      if (!trackRef.current || !stageRef.current || !ghostRef.current) return;
-      const trackWidth = trackRef.current.scrollWidth;
-      const stageWidth = stageRef.current.clientWidth;
+      if (!mounted) return;
+      const track = trackRef.current;
+      const stage = stageRef.current;
+      const ghost = ghostRef.current;
+      if (!track || !stage || !ghost) return;
+      const trackWidth = track.scrollWidth;
+      const stageWidth = stage.clientWidth;
 
       // Solve: at maxScrollX with scale=SCALE_MIN, last card's right edge sits
       // at stage's right edge. Transform pivots around stage center (S/2):
@@ -49,7 +55,7 @@ export default function DollyZoomStage({ children, onProgress }: DollyZoomStageP
         0,
         (trackWidth - halfStage) * SCALE_MIN - halfStage
       );
-      ghostRef.current.style.width = `${maxScrollX + window.innerWidth}px`;
+      ghost.style.width = `${maxScrollX + window.innerWidth}px`;
     };
 
     updateGhostWidth();
@@ -59,6 +65,7 @@ export default function DollyZoomStage({ children, onProgress }: DollyZoomStageP
     window.addEventListener("resize", updateGhostWidth);
 
     return () => {
+      mounted = false;
       observer.disconnect();
       window.removeEventListener("resize", updateGhostWidth);
     };
@@ -83,7 +90,10 @@ export default function DollyZoomStage({ children, onProgress }: DollyZoomStageP
       if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
         const firstCard = trackRef.current.firstElementChild as HTMLElement;
         const cardWidth = firstCard ? firstCard.getBoundingClientRect().width : 1200;
-        const gap = 16;
+        // keep in sync with --card-gap in globals.css
+        const gap = parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue("--card-gap")
+        ) || 32;
         const move = e.key === "ArrowRight" ? cardWidth + gap : -(cardWidth + gap);
         window.scrollBy({ left: move, behavior: shouldReduceMotion ? "auto" : "smooth" });
       }

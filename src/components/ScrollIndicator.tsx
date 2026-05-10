@@ -8,11 +8,11 @@ interface ScrollIndicatorProps {
   currentProgress: number;
 }
 
-const TOTAL_LINES = 24;
+const TOTAL_LINES = 12;
 const LINE_WIDTH = 1;
-const LINE_HEIGHT = 18;
-const LINE_GAP = 9;
-const TRACKER_WIDTH = 30;
+const LINE_HEIGHT = 14;
+const LINE_GAP = 6;
+const TRACKER_WIDTH = 22;
 const HIDE_DELAY_MS = 1500;
 
 export default function ScrollIndicator({ currentProgress }: ScrollIndicatorProps) {
@@ -52,7 +52,7 @@ export default function ScrollIndicator({ currentProgress }: ScrollIndicatorProp
             className="block bg-[var(--text-muted)]"
             style={{ width: LINE_WIDTH, height: LINE_HEIGHT }}
             initial={false}
-            animate={{ opacity: isScrolling ? 0.4 : 0 }}
+            animate={{ opacity: isScrolling ? 0.55 : 0.18 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           />
         ))}
@@ -65,7 +65,7 @@ export default function ScrollIndicator({ currentProgress }: ScrollIndicatorProp
             background: "transparent",
           }}
           initial={false}
-          animate={{ x: trackerLeft, opacity: isScrolling ? 1 : 0 }}
+          animate={{ x: trackerLeft, opacity: isScrolling ? 1 : 0.35 }}
           transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.6 }}
         />
       </div>

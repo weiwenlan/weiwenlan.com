@@ -34,14 +34,13 @@ export default function BaseCard({
         relative shrink-0
         w-[var(--card-w)] h-[var(--card-h)]
         bg-[var(--card-bg)]
-        border border-[var(--border)]
         overflow-hidden
         flex flex-col
         ${className}
       `}
     >
       {caption && (
-        <div className="card-caption absolute top-6 left-6 z-10 text-[12px] font-mono uppercase tracking-widest">
+        <div className="card-caption absolute top-8 left-8 z-10 text-[13px] font-mono uppercase tracking-widest">
           {caption}
         </div>
       )}

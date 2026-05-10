@@ -34,7 +34,7 @@ export default function ContactCard({ caption = "Say hi", index }: ContactCardPr
               rel={external ? "noopener noreferrer" : undefined}
               className={`group flex items-baseline gap-[0.3em] transition-colors duration-150 hover:text-[var(--accent-red)] ${
                 line.indent ? "ml-[5.3%]" : "ml-0"
-              } ${line.muted ? "text-[var(--text-muted)]" : ""}`}
+              } ${line.muted ? "opacity-50" : ""}`}
             >
               <span>{line.label}</span>
               <span
