@@ -10,9 +10,9 @@ interface HandwrittenCardProps {
 export default function HandwrittenCard({ caption, text, index }: HandwrittenCardProps) {
   return (
     <BaseCard caption={caption} index={index}>
-      <div className="w-full h-full flex items-center justify-center p-12">
+      <div className="w-full h-full flex items-start justify-start pt-[12%] pl-[8%] pr-[8%]">
         <p
-          className="reveal-text text-[var(--accent-red)] text-[clamp(56px,9vw,140px)] leading-tight text-center -rotate-2"
+          className="reveal-text text-[var(--accent-red)] text-[clamp(56px,9vw,140px)] leading-[0.95] -rotate-2"
           style={{ fontFamily: 'var(--font-caveat), cursive' }}
         >
           {text}

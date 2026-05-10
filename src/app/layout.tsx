@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Caveat } from "next/font/google";
+import { Inter, Caveat, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -13,6 +13,12 @@ const caveat = Caveat({
   subsets: ["latin"],
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
 export const metadata: Metadata = {
   title: "Wenlan Wei",
   description: "Wenlan Wei rolls one boulder at a time.",
@@ -24,10 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} ${caveat.variable} antialiased`}
-      >
+    <html lang="en" className={`${inter.variable} ${caveat.variable} ${jetbrainsMono.variable}`}>
+      <body className="antialiased">
         <a href="#content" className="skip-link">Skip to content</a>
         {children}
       </body>

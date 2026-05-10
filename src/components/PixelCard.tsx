@@ -14,7 +14,7 @@ export default function PixelCard({ caption, index }: PixelCardProps) {
       <div className="w-full h-full flex items-center justify-center">
         <div
           className="reveal-shape relative flex flex-col items-center justify-end"
-          style={{ "--pixel-color": "var(--accent-blue)", "--pixel": "clamp(8px, 1.6vw, 24px)" } as React.CSSProperties}
+          style={{ "--pixel-color": "var(--accent-blue)", "--pixel": "clamp(16px, 3.5vw, 48px)" } as React.CSSProperties}
         >
           {MOUNTAIN_ROWS.map((multiplier) => (
             <div key={multiplier} className="flex w-full justify-center">
