@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 
@@ -14,25 +12,15 @@ interface EntryListProps {
   entries: Entry[];
 }
 
-/**
- * EntryList — rauno.me-style list view used on /work and /papers.
- * Each row: title on the left, year on the right, separated by a dotted leader.
- * Rows fade in with a small stagger to feel alive.
- *
- * Conventions:
- *  - External hrefs (http/https) open in a new tab
- *  - Internal hrefs use next/link (prefetched, client-side)
- *  - Rows without href render as plain divs (placeholder content)
- */
 export default function EntryList({ entries }: EntryListProps) {
   return (
     <ul className="entry-list">
       {entries.map((entry, idx) => {
         const isExternal = !!entry.href && /^https?:\/\//.test(entry.href);
-        const delay = `${idx * 40}ms`;
         const inner = (
           <>
             <span className="entry-title">{entry.title}</span>
+            <span className="entry-leader" aria-hidden />
             <span className="entry-meta">
               {entry.description && (
                 <span className="entry-venue">{entry.description}</span>
@@ -43,11 +31,7 @@ export default function EntryList({ entries }: EntryListProps) {
         );
 
         return (
-          <li
-            key={`${entry.title}-${entry.year}-${idx}`}
-            className="entry-row"
-            style={{ ["--entry-delay" as string]: delay }}
-          >
+          <li key={`${entry.title}-${entry.year}-${idx}`}>
             {entry.href ? (
               isExternal ? (
                 <a
