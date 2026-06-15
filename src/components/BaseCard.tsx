@@ -30,24 +30,23 @@ export default function BaseCard({
         ["--delay" as string]: delay,
         transform: "translateZ(0)",
         backfaceVisibility: "hidden",
-        contain: "layout paint",
+        contain: "layout",
       }}
       className={`
         card-hoverable card stagger-item
         relative shrink-0
         w-[var(--card-w)] h-[var(--card-h)]
-        bg-[var(--card-bg)]
-        overflow-hidden
-        flex flex-col
         ${className}
       `}
     >
       {caption && (
-        <div className="card-caption absolute top-8 left-8 z-[var(--z-content)] text-[13px] font-mono uppercase tracking-widest">
+        <div className="card-caption absolute -top-8 left-0 z-[var(--z-content)] text-[13px] font-mono">
           {caption}
         </div>
       )}
-      {children}
+      <div className="relative h-full w-full overflow-hidden bg-[var(--card-bg)] flex flex-col">
+        {children}
+      </div>
     </div>
   );
 }

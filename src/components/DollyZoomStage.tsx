@@ -1,37 +1,58 @@
 "use client";
 
 import React, { useRef, useEffect, ReactNode } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  MotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 
 interface DollyZoomStageProps {
   children: ReactNode;
-  onProgress?: (progress: number) => void;
+  progress?: MotionValue<number>;
 }
 
-const SCALE_MAX = 0.95;
+const SCALE_MAX = 1;
 const SCALE_MIN = 0.62;
+const SCROLL_SPRING = { stiffness: 180, damping: 32, mass: 0.45 };
+const ZOOM_SPRING = { stiffness: 460, damping: 44, mass: 0.24 };
+const SNAP_ZONE = 0.18;
+const SNAP_WEIGHT = 0.78;
 
-const raunoEase = (t: number) => Math.pow(t, 0.85);
+const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
-export default function DollyZoomStage({ children, onProgress }: DollyZoomStageProps) {
+const snapZoom = (progress: number) => {
+  const p = Math.min(Math.max(progress, 0), 1);
+  if (p <= SNAP_ZONE) {
+    return easeOutCubic(p / SNAP_ZONE) * SNAP_WEIGHT;
+  }
+  return SNAP_WEIGHT + easeOutCubic((p - SNAP_ZONE) / (1 - SNAP_ZONE)) * (1 - SNAP_WEIGHT);
+};
+
+export default function DollyZoomStage({ children, progress }: DollyZoomStageProps) {
   const ghostRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const { scrollX, scrollXProgress } = useScroll({ axis: "x" });
   const shouldReduceMotion = useReducedMotion();
+  const smoothScrollX = useSpring(scrollX, SCROLL_SPRING);
+  const smoothProgress = useSpring(scrollXProgress, ZOOM_SPRING);
 
-  const translateX = useTransform(scrollX, (v) => -v);
-  const scale = useTransform(scrollXProgress, (p) => {
+  const translateX = useTransform(smoothScrollX, (v) => -v);
+  const scale = useTransform(smoothProgress, (p) => {
     if (shouldReduceMotion) return 1;
-    return SCALE_MAX - (SCALE_MAX - SCALE_MIN) * raunoEase(p);
+    return SCALE_MAX - (SCALE_MAX - SCALE_MIN) * snapZoom(p);
   });
 
   useEffect(() => {
-    if (!onProgress) return;
-    const unsubscribe = scrollXProgress.on("change", onProgress);
+    if (!progress) return;
+    const unsubscribe = smoothProgress.on("change", (value) => progress.set(value));
     return () => unsubscribe();
-  }, [scrollXProgress, onProgress]);
+  }, [smoothProgress, progress]);
 
   useEffect(() => {
     let mounted = true;
