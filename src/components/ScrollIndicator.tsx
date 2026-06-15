@@ -1,22 +1,24 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, MotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 
 interface ScrollIndicatorProps {
-  totalSteps: number;
-  currentProgress: number;
+  progress: MotionValue<number>;
 }
 
-const TOTAL_LINES = 20;
-const LINE_WIDTH = 1;
-const LINE_HEIGHT = 18;
-const LINE_GAP = 9;
-const TRACKER_WIDTH = 30;
+const TOTAL_BARS = 20;
+const BAR_WIDTH = 1;
+const BAR_GAP = 7;
+const BAR_HEIGHT = 12;
+const TRACKER_WIDTH = 2;
+const TRACKER_HEIGHT = 20;
+const INDICATOR_WIDTH = TOTAL_BARS * BAR_WIDTH + (TOTAL_BARS - 1) * BAR_GAP;
+const INDICATOR_SPRING = { stiffness: 240, damping: 34, mass: 0.5 };
 
-export default function ScrollIndicator({ currentProgress }: ScrollIndicatorProps) {
-  const lineSpacing = LINE_WIDTH + LINE_GAP;
-  const railWidth = TOTAL_LINES * lineSpacing - LINE_GAP;
-  const trackerLeft = currentProgress * (railWidth - TRACKER_WIDTH);
+export default function ScrollIndicator({ progress }: ScrollIndicatorProps) {
+  const shouldReduceMotion = useReducedMotion();
+  const displayProgress = useSpring(progress, shouldReduceMotion ? { duration: 0 } : INDICATOR_SPRING);
+  const trackerLeft = useTransform(displayProgress, [0, 1], [0, INDICATOR_WIDTH - TRACKER_WIDTH]);
 
   return (
     <div
@@ -25,30 +27,28 @@ export default function ScrollIndicator({ currentProgress }: ScrollIndicatorProp
     >
       <div
         className="relative flex items-center"
-        style={{ height: LINE_HEIGHT, gap: `${LINE_GAP}px` }}
+        style={{ width: INDICATOR_WIDTH, height: TRACKER_HEIGHT, gap: BAR_GAP }}
       >
-        {Array.from({ length: TOTAL_LINES }, (_, i) => (
+        {Array.from({ length: TOTAL_BARS }).map((_, index) => (
           <span
-            key={i}
+            key={index}
             className="block"
             style={{
-              width: LINE_WIDTH,
-              height: LINE_HEIGHT,
+              width: BAR_WIDTH,
+              height: BAR_HEIGHT,
               background: "rgb(143, 143, 143)",
             }}
           />
         ))}
         <motion.div
-          className="absolute top-0 box-border"
+          className="absolute top-0"
+          initial={false}
           style={{
             width: TRACKER_WIDTH,
-            height: LINE_HEIGHT,
-            border: `${LINE_WIDTH}px solid rgb(143, 143, 143)`,
-            background: "var(--bg)",
+            height: TRACKER_HEIGHT,
+            background: "rgb(23, 23, 23)",
+            x: trackerLeft,
           }}
-          initial={false}
-          animate={{ x: trackerLeft }}
-          transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.6 }}
         />
       </div>
     </div>

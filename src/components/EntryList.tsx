@@ -23,7 +23,7 @@ export default function EntryList({ entries, variant = "default" }: EntryListPro
           variant === "stacked" ? (
             <>
               <span className="entry-row-top">
-                <span className="entry-title">{entry.title}</span>
+                <span className="entry-title" title={entry.title}>{entry.title}</span>
                 <span className="entry-leader" aria-hidden />
                 <span className="entry-year">{entry.year}</span>
               </span>
@@ -33,7 +33,7 @@ export default function EntryList({ entries, variant = "default" }: EntryListPro
             </>
           ) : (
             <>
-              <span className="entry-title">{entry.title}</span>
+              <span className="entry-title" title={entry.title}>{entry.title}</span>
               <span className="entry-leader" aria-hidden />
               <span className="entry-meta">
                 {entry.description && (
@@ -55,18 +55,19 @@ export default function EntryList({ entries, variant = "default" }: EntryListPro
                 <a
                   className="entry-link"
                   href={entry.href}
+                  title={entry.title}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   {inner}
                 </a>
               ) : (
-                <Link className="entry-link" href={entry.href}>
+                <Link className="entry-link" href={entry.href} title={entry.title}>
                   {inner}
                 </Link>
               )
             ) : (
-              <div className="entry-link entry-link--inert">{inner}</div>
+              <div className="entry-link entry-link--inert" title={entry.title}>{inner}</div>
             )}
           </li>
         );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Children } from "react";
+import { useMotionValue } from "framer-motion";
 import DollyZoomStage from "@/components/DollyZoomStage";
 import IntroCard from "@/components/IntroCard";
 import BigTypeCard from "@/components/BigTypeCard";
@@ -12,7 +12,7 @@ import Crosshair from "@/components/Crosshair";
 import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default function HomeClient() {
-  const [progress, setProgress] = useState(0);
+  const progress = useMotionValue(0);
 
   const cards = [
     <IntroCard key="intro" index={0} />,
@@ -30,8 +30,8 @@ export default function HomeClient() {
       className="min-h-screen bg-[var(--bg)] flex flex-col items-center selection:bg-[var(--accent-yellow)] selection:text-[var(--text)]"
     >
       <Crosshair />
-      <ScrollIndicator totalSteps={Children.count(cards)} currentProgress={progress} />
-      <DollyZoomStage onProgress={setProgress}>{cards}</DollyZoomStage>
+      <ScrollIndicator progress={progress} />
+      <DollyZoomStage progress={progress}>{cards}</DollyZoomStage>
     </main>
   );
 }

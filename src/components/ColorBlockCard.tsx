@@ -26,7 +26,7 @@ export default function ColorBlockCard({ caption, shape, color, index }: ColorBl
         )}
         {shape === "wedge" && (
           <div
-            className="reveal-shape absolute -left-[4%] bottom-[8%] w-[55%] aspect-square"
+            className="reveal-shape absolute -left-[8%] bottom-[6%] w-[58%] aspect-square opacity-95"
             style={{
               backgroundColor: color,
               clipPath: "polygon(0 0, 100% 100%, 0 100%)",

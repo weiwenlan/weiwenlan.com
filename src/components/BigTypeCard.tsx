@@ -26,10 +26,13 @@ export default function BigTypeCard({ caption, bigText, index, href }: BigTypeCa
     <Link
       href={href}
       aria-label={caption}
-      className="block cursor-pointer focus-visible:outline-none focus-visible:[&_>div]:outline focus-visible:[&_>div]:outline-2 focus-visible:[&_>div]:outline-[var(--focus-ring)] focus-visible:[&_>div]:outline-offset-[-4px]"
-      style={{ transform: "translateZ(0)", backfaceVisibility: "hidden", contain: "layout paint" }}
+      className="group relative block cursor-pointer focus-visible:outline-none focus-visible:[&_>div]:outline focus-visible:[&_>div]:outline-2 focus-visible:[&_>div]:outline-[var(--focus-ring)] focus-visible:[&_>div]:outline-offset-[-4px]"
+      style={{ transform: "translateZ(0)", backfaceVisibility: "hidden", contain: "layout" }}
     >
       {card}
+      <span className="absolute right-8 bottom-8 z-[var(--z-content)] font-mono text-[13px] uppercase tracking-[0.08em] text-[var(--text-muted)] opacity-0 translate-y-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0">
+        Open →
+      </span>
     </Link>
   );
 }
